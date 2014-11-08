@@ -22,6 +22,28 @@ describe('basic notes crud', function() {
     });
   });
 
+  it('should send valid note', function(done) {
+    chai.request('http://localhost:3000');
+    .post('/api/notes');
+    .send('noteBody': 'hello world');
+    .end(function (err, res) {
+      expect(err).to.eql(null)
+      expect(res.body.noteBody).to eql('hello world')
+      done();
+    })
+  })
+
+  it('should send error message on invalid note', function(done) {
+    chai.request('http://localhost:3000');
+    .post('/api/notes');
+    .send('noteBody': 'for real');
+    .end(function (err, res) {
+      expect(err.message).to.eql('invalid string')
+      expect(res.body.noteBody).to eql(null)
+      done();
+    })
+  })
+
   it('should be able to get an index', function(done) {
     chai.request('http://localhost:3000')
     .get('/api/notes')
