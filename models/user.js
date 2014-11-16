@@ -1,6 +1,7 @@
 //jshint node:true
 'use strict';
 
+var moment = require('moment')
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jwt-simple');
@@ -21,9 +22,11 @@ userSchema.methods.validPassword = function(password) {
 };
 
 userSchema.methods.generateToken = function(secret) {
+  var expires = moment().add(10, 'm').valueOf();
   var self = this;
   var token = jwt.encode({
-    iss: self._id
+    iss: self._id,
+    exp: expires
   }, secret);
   return token;
 };
