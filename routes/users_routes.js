@@ -12,6 +12,9 @@ module.exports = function(app, passport) {
     User.findOne({'basic.email': req.body.email}, function(err, user) {
       if (err) return res.status(500).send('server error');
       if (user) return res.status(500).send('cannot create that user');
+      if (req.body.password == req.body.email) return res.status(500).send('password and user cannot be the same');
+      var passwordTest = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}/;
+      if (!passwordTest.test(req.body.password)) return res.status(500).send('invalid password')
 
       var newUser = new User();
       newUser.basic.email = req.body.email;
@@ -22,4 +25,18 @@ module.exports = function(app, passport) {
       });
     });
   });
+  //   app.post('/api/users/admins', function(req, res) {
+  //   User.findOne({'basic.email': req.body.email}, function(err, user) {
+  //     if (err) return res.status(500).send('server error');
+  //     if (user) return res.status(500).send('cannot create that user');
+
+  //     var newadmin = new User();
+  //     newadmin.basic.email = req.body.email;
+  //     newadmin.basic.password = newUser.generateHash(req.body.password);
+  //     newadmin.save(function(err, data) {
+  //       if (err) return res.status(500).send('server error');
+  //       res.json({'jwt': newadmin.generateToken(app.get('jwtSecret', true))});
+  //     });
+  //   });
+  // });
 };
