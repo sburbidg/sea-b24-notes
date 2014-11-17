@@ -25,18 +25,4 @@ module.exports = function(app, passport) {
       });
     });
   });
-  //   app.post('/api/users/admins', function(req, res) {
-  //   User.findOne({'basic.email': req.body.email}, function(err, user) {
-  //     if (err) return res.status(500).send('server error');
-  //     if (user) return res.status(500).send('cannot create that user');
-
-  //     var newadmin = new User();
-  //     newadmin.basic.email = req.body.email;
-  //     newadmin.basic.password = newUser.generateHash(req.body.password);
-  //     newadmin.save(function(err, data) {
-  //       if (err) return res.status(500).send('server error');
-  //       res.json({'jwt': newadmin.generateToken(app.get('jwtSecret', true))});
-  //     });
-  //   });
-  // });
 };
