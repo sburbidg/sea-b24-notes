@@ -27,6 +27,7 @@ userSchema.methods.generateToken = function(secret, admin) {
   var token = jwt.encode({
     iss: self._id,
     exp: expires,
+    adm: admin
   }, secret);
   return token;
 };
