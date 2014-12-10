@@ -19,6 +19,6 @@ module.exports = function(app, passport) {
         if (err) return res.status(500).send('server error');
         res.json({'jwt': newUser.generateToken(app.get('jwtSecret'))});
       });
-    })
+    });
   });
 };

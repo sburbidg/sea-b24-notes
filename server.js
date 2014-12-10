@@ -19,7 +19,7 @@ notesRouter.use(jwtauth);
 
 require('./routes/users_routes')(app, passport);
 require('./routes/notes_routes')(notesRouter);
-app.use('/v1', notesRouter);
+app.use('/', notesRouter);
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
