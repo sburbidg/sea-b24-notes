@@ -2,7 +2,9 @@
 var Note = require('../models/note');
 
 module.exports = function(app) {
+<<<<<<< HEAD
   app.get('/api/notes', function(req, res) {
+
     Note.find({}, function(err, data) {
       if (err) return res.status(500).send('there was an error');
       res.json(data);
