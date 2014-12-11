@@ -2,7 +2,6 @@
 var Note = require('../models/note');
 
 module.exports = function(app) {
-<<<<<<< HEAD
   app.get('/api/notes', function(req, res) {
 
     Note.find({}, function(err, data) {
