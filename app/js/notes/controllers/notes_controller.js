@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('notesCtrl', ['$scope', '$http', 'ResourceBackend', '$cookies', '$location', function($scope, $http, ResourceBackend, $cookies, $location) {
+  app.controller('notesCtrl', ['$scope', '$http', 'ResourceBackend', '$cookies', '$location', 'responseIntService', function($scope, $http, ResourceBackend, $cookies, $location, $responseIntService) {
     var notesBackend = new ResourceBackend('notes');
-    if (!$cookies.jwt || !$cookies.jwt.length > 0) return $location.path('/users');
+    if (!$cookies.jwt || !$cookies.jwt.length) return $location.path('/users');
 
     $http.defaults.headers.common['jwt'] = $cookies.jwt;
 
@@ -34,6 +34,11 @@ module.exports = function(app) {
       .success(function() {
         $scope.notes.splice($scope.notes.indexOf(note), 1);
       });
+    };
+
+    $scope.logout = function() {
+      $cookies.jwt = null;
+      $location.path('/users');
     };
   }]);
 };

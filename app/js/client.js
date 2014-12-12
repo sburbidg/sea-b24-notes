@@ -1,3 +1,5 @@
+'use strict';
+
 require('angular/angular');
 require('angular-route');
 require('angular-cookies');
@@ -7,7 +9,7 @@ var notesApp = angular.module('notesApp', ['ngRoute', 'ngCookies', 'base64']);
 
 require('./users/users')(notesApp);
 //directives
-require('./directives/dummy_direc')(notesApp);
+
 require('./notes/directives/new_note_form_direc')(notesApp);
 
 //services

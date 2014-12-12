@@ -1,7 +1,8 @@
+/*jshint -W069 */
 'use strict';
 
 module.exports = function(app) {
-  app.controller('UsersCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', function($scope, $http, $cookies, $base64, $location){
+  app.controller('UsersCtrl', ['$scope', '$http', '$cookies', '$base64', '$location', 'responseIntService', function($scope, $http, $cookies, $base64, $location, responseIntService){
     $scope.errors = [];
     $scope.signIn = function() {
       $scope.errors = [];
@@ -47,5 +48,11 @@ module.exports = function(app) {
         $scope.errors.push(data);
       });
     };
+
+    $scope.logout = function() {
+        delete $cookies['jwt'];
+        $location.url('/users');
+
+      };
   }]);
 };
